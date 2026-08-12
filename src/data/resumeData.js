@@ -1,7 +1,7 @@
 const resumeData = {
   personalInfo: {
     name: "MOHD SHAHRIN BIN BAHAR",
-    title: "Pegawai Tadbir N41 (Open Vote)",
+    title: "Pegawai Tadbir",
     bio: "My career objective is to use my skills and expertise to make a meaningful impact in a role that utilises my strengths and allows me to continue learning and growing. I am a highly motivated and detail-oriented individual with excellent problem-solving skills.",
     location: "6-3 Blok G University Appartment 2, Jalan Sulaman, 88450 Kota Kinabalu",
     phone: "0135453517",
@@ -12,7 +12,7 @@ const resumeData = {
     {
       degree: "Doctor of Philosophy (PhD)",
       institution: "Universiti Teknologi MARA (UiTM)",
-      year: "2024",
+      year: "2025",
       details: "Completed doctoral studies."
     },
     {
