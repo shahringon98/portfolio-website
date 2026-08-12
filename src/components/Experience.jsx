@@ -31,7 +31,7 @@ const Experience = ({ data }) => {
                 <Briefcase className="text-accent-cyan flex-shrink-0 mt-1" size={24} />
                 <div className="flex-1">
                   <h3 className="text-2xl font-bold text-white">{exp.role}</h3>
-                  <p className="text-accent-cyan font-semibold">{exp.company}</p>
+                  <p className="text-accent-cyan font-semibold">{exp.organization}</p>
                   <p className="text-slate-400 text-sm mb-3">{exp.period}</p>
                   <p className="text-slate-300 mb-4">{exp.description}</p>
                   <ul className="space-y-2">

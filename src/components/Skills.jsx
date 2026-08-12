@@ -57,7 +57,7 @@ const Skills = ({ data }) => {
                 transition={{ duration: 0.6, delay: index * 0.05 }}
                 className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-lg p-4 text-center hover:border-accent-cyan/50 transition cursor-pointer"
               >
-                <p className="text-slate-300 font-semibold">{skill}</p>
+                <p className="text-slate-300 font-semibold">{typeof skill === 'string' ? skill : skill.name}</p>
               </motion.div>
             ))}
           </div>

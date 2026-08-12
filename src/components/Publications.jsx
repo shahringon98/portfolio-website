@@ -34,19 +34,21 @@ const Publications = ({ data }) => {
                     {pub.title}
                   </h3>
                   <div className="space-y-1 mb-3">
-                    <p className="text-accent-cyan text-sm font-semibold">{pub.journal}</p>
-                    <p className="text-slate-400 text-sm">Authors: {pub.authors}</p>
-                    <p className="text-slate-400 text-sm">Year: {pub.year}</p>
-                    <p className="text-slate-400 text-sm font-mono">DOI: {pub.doi}</p>
+                    {pub.journal && <p className="text-accent-cyan text-sm font-semibold">{pub.journal}</p>}
+                    {pub.authors && <p className="text-slate-400 text-sm">Authors: {pub.authors}</p>}
+                    {pub.year && <p className="text-slate-400 text-sm">Year: {pub.year}</p>}
+                    {pub.doi && <p className="text-slate-400 text-sm font-mono">DOI: {pub.doi}</p>}
                   </div>
-                  <a
-                    href={`https://doi.org/${pub.doi}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-accent-cyan hover:text-accent-cyan/80 transition"
-                  >
-                    Read Paper <ExternalLink size={16} />
-                  </a>
+                  {pub.doi && (
+                    <a
+                      href={`https://doi.org/${pub.doi}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-accent-cyan hover:text-accent-cyan/80 transition"
+                    >
+                      Read Paper <ExternalLink size={16} />
+                    </a>
+                  )}
                 </div>
               </div>
             </motion.div>
