@@ -1,69 +1,52 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase } from 'lucide-react';
-import { useScrollReveal, staggerContainer, staggerItem } from '../hooks/useScrollReveal';
+import { useInView } from 'react-intersection-observer';
+import { Briefcase, CheckCircle } from 'lucide-react';
 
 const Experience = ({ data }) => {
-  const { ref, controls } = useScrollReveal();
+  const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true });
 
   return (
-    <section id="experience" className="py-24 relative">
-      <div className="container mx-auto px-6 md:px-12">
-        <motion.div
-          ref={ref}
-          variants={staggerContainer}
-          initial="hidden"
-          animate={controls}
-          className="max-w-5xl mx-auto"
+    <section id="experience" ref={ref} className="relative min-h-screen flex items-center py-20 z-10 px-4">
+      <div className="max-w-6xl mx-auto w-full">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6 }}
+          className="text-4xl md:text-5xl font-bold text-white mb-12"
         >
-          <motion.div variants={staggerItem} className="flex items-center gap-4 mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-100 whitespace-nowrap">
-              <span className="text-accent-cyan font-mono text-xl md:text-2xl mr-2">02.</span>
-              Where I've Worked
-            </h2>
-            <div className="h-px bg-slate-700 w-full" />
-          </motion.div>
+          Experience
+        </motion.h2>
 
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-px bg-slate-700" />
-            
-            <div className="space-y-12">
-              {data.experience.map((exp, idx) => (
-                <motion.div 
-                  key={idx} 
-                  variants={staggerItem}
-                  className={`relative flex flex-col md:flex-row items-start ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
-                >
-                  {/* Timeline Dot */}
-                  <div className="absolute left-[-8px] md:left-1/2 transform md:-translate-x-1/2 mt-6 w-4 h-4 rounded-full bg-accent-cyan ring-4 ring-navy-900 z-10" />
-                  
-                  {/* Content Box */}
-                  <div className={`ml-8 md:ml-0 md:w-1/2 ${idx % 2 === 0 ? 'md:pl-12' : 'md:pr-12'}`}>
-                    <div className="glass-card p-8 group">
-                      <div className="flex items-center justify-between mb-2">
-                        <h3 className="text-xl font-bold text-slate-100 group-hover:text-accent-cyan transition-colors">{exp.role}</h3>
-                        <span className="text-sm font-mono text-accent-indigo hidden md:block">{exp.period}</span>
-                      </div>
-                      
-                      <div className="text-lg font-medium text-slate-300 mb-4">{exp.organization}</div>
-                      <span className="text-sm font-mono text-accent-indigo mb-6 inline-block md:hidden">{exp.period}</span>
-                      
-                      <ul className="space-y-3">
-                        {exp.responsibilities.map((resp, i) => (
-                          <li key={i} className="flex items-start text-slate-400 text-sm">
-                            <span className="text-accent-cyan mr-2 mt-1">▹</span>
-                            <span className="leading-relaxed">{resp}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
+        <div className="space-y-8">
+          {data.experience?.map((exp, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: -20 }}
+              animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-lg p-6 hover:border-accent-cyan/50 transition"
+            >
+              <div className="flex items-start gap-4">
+                <Briefcase className="text-accent-cyan flex-shrink-0 mt-1" size={24} />
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-white">{exp.role}</h3>
+                  <p className="text-accent-cyan font-semibold">{exp.company}</p>
+                  <p className="text-slate-400 text-sm mb-3">{exp.period}</p>
+                  <p className="text-slate-300 mb-4">{exp.description}</p>
+                  <ul className="space-y-2">
+                    {exp.achievements?.map((achievement, i) => (
+                      <li key={i} className="flex items-center gap-2 text-slate-300">
+                        <CheckCircle size={16} className="text-accent-cyan" />
+                        {achievement}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

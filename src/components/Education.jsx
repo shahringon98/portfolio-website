@@ -1,56 +1,44 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap } from 'lucide-react';
-import { useScrollReveal, staggerContainer, staggerItem } from '../hooks/useScrollReveal';
+import { useInView } from 'react-intersection-observer';
+import { Award } from 'lucide-react';
 
 const Education = ({ data }) => {
-  const { ref, controls } = useScrollReveal();
+  const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true });
 
   return (
-    <section id="education" className="py-24 relative">
-      <div className="container mx-auto px-6 md:px-12">
-        <motion.div
-          ref={ref}
-          variants={staggerContainer}
-          initial="hidden"
-          animate={controls}
-          className="max-w-5xl mx-auto"
+    <section id="education" ref={ref} className="relative min-h-screen flex items-center py-20 z-10 px-4">
+      <div className="max-w-6xl mx-auto w-full">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6 }}
+          className="text-4xl md:text-5xl font-bold text-white mb-12"
         >
-          <motion.div variants={staggerItem} className="flex items-center gap-4 mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-100 whitespace-nowrap">
-              <span className="text-accent-cyan font-mono text-xl md:text-2xl mr-2">03.</span>
-              Education
-            </h2>
-            <div className="h-px bg-slate-700 w-full" />
-          </motion.div>
+          Education
+        </motion.h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {data.education.map((edu, idx) => (
-              <motion.div 
-                key={idx} 
-                variants={staggerItem}
-                className="relative group h-full"
-              >
-                {/* Gradient Border Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-accent-indigo via-accent-violet to-accent-cyan rounded-2xl opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
-                
-                <div className="relative h-full glass-card p-8 flex flex-col bg-navy-800">
-                  <div className="w-12 h-12 rounded-full bg-accent-cyan/10 flex items-center justify-center text-accent-cyan mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <GraduationCap size={24} />
-                  </div>
-                  
-                  <h3 className="text-xl font-bold text-slate-100 mb-2">{edu.degree}</h3>
-                  <div className="text-accent-indigo font-medium mb-1">{edu.institution}</div>
-                  <div className="text-sm font-mono text-slate-400 mb-4">{edu.year}</div>
-                  
-                  <p className="text-slate-400 text-sm leading-relaxed mt-auto">
-                    {edu.details}
-                  </p>
+        <div className="space-y-8">
+          {data.education?.map((edu, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: -20 }}
+              animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-lg p-6 hover:border-accent-cyan/50 transition"
+            >
+              <div className="flex items-start gap-4">
+                <Award className="text-accent-cyan flex-shrink-0 mt-1" size={24} />
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-white">{edu.degree}</h3>
+                  <p className="text-accent-cyan font-semibold">{edu.institution}</p>
+                  <p className="text-slate-400 text-sm mb-2">{edu.year}</p>
+                  <p className="text-slate-300">{edu.details}</p>
                 </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
