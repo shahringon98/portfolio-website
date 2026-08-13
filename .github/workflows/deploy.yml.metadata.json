@@ -1,0 +1,5 @@
+{
+  "summary":  "GitHub Actions workflow that auto-builds the Vite React app and deploys to GitHub Pages on every push to main",
+  "updatedAt":  "2026-08-13T02:08:25.272475300Z",
+  "userFacing":  true
+}
