@@ -2,7 +2,7 @@ const resumeData = {
   personalInfo: {
     name: "MOHD SHAHRIN BIN BAHAR",
     title: "Pegawai Tadbir N41 (Open Vote)",
-    bio: "My career objective is to use my skills and expertise to make a meaningful impact in a role that utilises my strengths and allows me to continue learning and growing. I am a highly motivated and detail-oriented individual with excellent problem-solving skills.",
+    bio: "My career objective is to use my skills and expertise to make a meaningful impact in a role that utilises my strengths and allows me to continue learning and growing. I am a highly motivated professional with experience in economic analysis, data science, and policy advisory work, and I enjoy tackling complex problems with data-driven solutions.",
     location: "6-3 Blok G University Appartment 2, Jalan Sulaman, 88450 Kota Kinabalu",
     phone: "0135453517",
     email: "mohdshahrinbahar@gmail.com",
